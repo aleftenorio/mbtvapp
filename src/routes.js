@@ -10,33 +10,46 @@ import Main from '~/pages/Main';
 import Perfil from '~/pages/Perfil';
 import Register from './pages/Register';
 
+import ViewChannel from './pages/ViewChannel'
+
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 
 // Stack de login
-const AuthStack = createStackNavigator({ 
+const AuthStack = createStackNavigator({
     SignIn: Login,
     SignUp: {
         screen: Register,
         navigationOptions: {
             title: 'Registre uma conta!',
             StatusBar: {
-              backgroundColor: 'orange'
+                backgroundColor: 'orange'
             },
-          },
+        },
     }
- });
+});
+
+// Stack de channel
+const ChannelStack = createStackNavigator({
+    Main: {
+        screen: Main,
+        navigationOptions: {
+            title: 'Lista de Canais',
+        }
+    },
+    ViewChannel: {
+        screen: ViewChannel,
+        // navigationOptions: {
+        //     title: 'Canal',
+        // }
+    },
+});
 
 // Stack interno
 const AppStack = createBottomTabNavigator(
     {
-        Main: {
-            screen: Main,
-            navigationOptions: {
-                title: 'Inicio',
-            }
-        },
-        Perfil: Perfil,
+        Main: ChannelStack,
+        Perfil: Perfil
     },
     {
         defaultNavigationOptions: ({ navigation }) => ({
